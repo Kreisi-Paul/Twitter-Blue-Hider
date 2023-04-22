@@ -15,6 +15,7 @@ div[data-testid=cellInnerDiv]:has(span > svg[data-testid=icon-verified] > g > pa
 }
 
 div[data-testid=cellInnerDiv]:has(span > svg[data-testid=icon-verified] > g > path:not([fill])) + div:not(:has(article)) {
+    /*hides response dropdowns*/
     /*background-color: greenyellow;*/
     display: none;
 }
