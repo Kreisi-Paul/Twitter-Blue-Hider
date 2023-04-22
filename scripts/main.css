@@ -1,11 +1,15 @@
 a[aria-label="Verified Organizations"], a[aria-label="Twitter Blue"] {
+    /*hides twitter blue ads*/
     display: none;
 }
 
 svg[data-testid=icon-verified] {
+    /*keep this for whitelisting*/
     color: rgb(244, 33, 46);
 }
 
 article:has(span > svg[data-testid=icon-verified]) {
+    /*hides articles that contain a verified Icon*/
+    /*TODO: fix comments still showing up, following div that does not contain aria-label="tweet" afaik*/
     display: none;
 }
