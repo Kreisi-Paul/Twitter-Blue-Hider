@@ -8,8 +8,13 @@ svg[data-testid=icon-verified] {
     color: rgb(244, 33, 46);
 }
 
-article:has(span > svg[data-testid=icon-verified]) {
+div[data-testid=cellInnerDiv]:has(span > svg[data-testid=icon-verified] > g > path:not([fill])) {
     /*hides articles that contain a verified Icon*/
-    /*TODO: fix comments still showing up, following div that does not contain aria-label="tweet" afaik*/
+    /*background-color: darkred;*/
+    display: none;
+}
+
+div[data-testid=cellInnerDiv]:has(span > svg[data-testid=icon-verified] > g > path:not([fill])) + div:not(:has(article)) {
+    /*background-color: greenyellow;*/
     display: none;
 }
