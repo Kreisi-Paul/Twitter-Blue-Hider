@@ -1,0 +1,11 @@
+a[aria-label="Verified Organizations"], a[aria-label="Twitter Blue"] {
+    display: none;
+}
+
+svg[data-testid=icon-verified] {
+    color: rgb(244, 33, 46);
+}
+
+article:has(span > svg[data-testid=icon-verified]) {
+    display: none;
+}
