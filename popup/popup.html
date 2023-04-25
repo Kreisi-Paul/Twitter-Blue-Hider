@@ -1,1 +1,55 @@
-<p>Hiding Elements...</p>
+<head>
+    <style>
+        body {
+            width: 300px;
+            height: 400px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        div {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 2;
+        }
+
+        div.popupDiv {
+            z-index: 1;
+            position: absolute;
+            left: 0;
+            right: 0;
+            background-color: aqua;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Twitter Blue Hider</h1>
+
+        <a href="#settings">Settings</a>
+        <a href="#whitelist">Whitelist</a>
+        <a href="#about">About</a>
+    </div>
+
+    <div id="settings">
+
+    </div>
+
+    <div id="whitelist">
+        <ul id="namelist">
+
+        </ul>
+        <span>
+            <input id="userInputText" type="text" title="Username">
+            <button id="userInputButton">Add User to Whitelist</button>
+        </span>
+    </div>
+
+<script src="popup.js"></script>
+</body>

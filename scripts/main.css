@@ -10,12 +10,12 @@ svg[data-testid=icon-verified] {
 
 div[data-testid=cellInnerDiv]:has(span > svg[data-testid=icon-verified] > g > path:not([fill])) {
     /*hides articles that contain a verified Icon*/
-    /*background-color: darkred;*/
-    display: none;
+    background-color: darkred;
+    /*display: none;*/
 }
 
 div[data-testid=cellInnerDiv]:has(span > svg[data-testid=icon-verified] > g > path:not([fill])) + div:not(:has(article)) {
     /*hides response dropdowns*/
-    /*background-color: greenyellow;*/
-    display: none;
+    background-color: greenyellow;
+    /*display: none;*/
 }
