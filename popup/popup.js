@@ -9,14 +9,20 @@ function registerButton() {
 
 function refreshWhitelist() {
     chrome.storage.sync.get(["whitelist"]).then((result) => {
-        console.log(result);
-        //console.log(result.whitelist)
-        whitelist = Array.from(result);
+        whitelist = result.whitelist;
+        
+        let nameList = document.querySelector("#namelist")
+        nameList.innerHTML = "";
+        console.log(whitelist.length)
+        console.log(whitelist)
+        for(let i=0, iLength=whitelist.length; i<iLength; i++) {
+            console.log(whitelist[i])
+            nameList.innerHTML += `<li>${whitelist[i]}</li>`
+        }
     });
 }
 
 function addUser(username) {
-    console.log(username);
     whitelist.push(username);
     chrome.storage.sync.set({ whitelist: whitelist });
     refreshWhitelist();
