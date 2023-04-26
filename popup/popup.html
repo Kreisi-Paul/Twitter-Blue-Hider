@@ -26,6 +26,12 @@
             height: 100%;
             width: 100%;
         }
+
+        td > a {
+            color: red;
+            cursor: pointer;
+            user-select: none;
+        }
     </style>
 </head>
 <body>
@@ -42,9 +48,11 @@
     </div>
 
     <div id="whitelist">
-        <ul id="namelist">
+        <table>
+            <tbody id="namelist">
 
-        </ul>
+            </tbody>
+        </table>
         <span>
             <input id="userInputText" type="text" title="Username">
             <button id="userInputButton">Add User to Whitelist</button>

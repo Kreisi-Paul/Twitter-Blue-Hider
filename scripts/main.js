@@ -2,6 +2,10 @@ let domChangeTimeout = false;
 let whitelist = new Array();
 let originalPost = new String();
 
+
+if(location.pathname == "/home")
+    console.log("home")
+
 if(/\/status\//.test(location.pathname)) {
     originalPost = location.pathname.split("/")[1];
 }
