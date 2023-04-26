@@ -1,26 +1,10 @@
-/*
-Old JS, might need this for whitelisting later
-
-var svgs = new Array();
-var convo = document.querySelector("[aria-label='Timeline: Conversation']")
-
-const observer = new MutationObserver(refreshSVGs);
-observer.observe(convo, {childList: true, subtree: true});
-
-function refreshSVGs() {
-    svgs = Array.from(document.querySelectorAll("[data-testid=icon-verified]"));
-    console.log(svgs);
-    highlight();
-}
-
-function highlight() {
-    for(let i=0, iLength=svgs.length; i<iLength; i++) {
-            svgs[i].style.color = "red";
-    }
-}
-*/
 let domChangeTimeout = false;
 let whitelist = new Array();
+let originalPost = new String();
+
+if(/\/status\//.test(location.pathname)) {
+    originalPost = location.pathname.split("/")[1];
+}
 
 const observer = new MutationObserver(domChanged);
 observer.observe(document.body, {childList: true, subtree: true});
@@ -28,7 +12,7 @@ observer.observe(document.body, {childList: true, subtree: true});
 function domChanged() {
     if(!domChangeTimeout) {
         domChangeTimeout = true;
-        setTimeout(() => {domChangeTimeout = false}, 1000); //only refreshes every 1sec
+        setTimeout(() => {domChangeTimeout = false}, 500); //only refreshes every 500ms
         //console.log("DOM changed");
 
         let twtBlueTweets = document.querySelectorAll("span:has(svg[data-testid=icon-verified] > g > path:not([fill]))");//Lists all hidden tweets
@@ -36,7 +20,8 @@ function domChanged() {
         //console.log(twtBlueTweets)
 
         chrome.storage.sync.get(["whitelist"]).then((result) => {//gets the whitelist...
-            whitelist = result.whitelist;//...as an Array
+            whitelist = result.whitelist;
+            whitelist.push(originalPost);//adds OP to whitelist temporarily
         });
 
         for(let i=0, iLength=whitelist.length; i<iLength; i++) {//iterates through all whitelisted usernames
