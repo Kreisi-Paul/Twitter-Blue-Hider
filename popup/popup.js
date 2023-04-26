@@ -23,7 +23,7 @@ function refreshWhitelist() {
             nameList.innerHTML += 
             `<tr>
                 <td>${whitelist[i]}</td>
-                <td><a id="wh_user_${whitelist[i]}">delete</td>
+                <td><a id="wh_user_${whitelist[i]}">delete</a></td>
             </tr>`
         }
     });
@@ -34,6 +34,7 @@ function addUser(username) {
         return;
     else {
         whitelist.push(username);
+        whitelist.sort();
         chrome.storage.sync.set({ whitelist: whitelist });
         refreshWhitelist();
     }
