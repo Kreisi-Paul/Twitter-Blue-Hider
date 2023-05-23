@@ -14,6 +14,10 @@ document.body.addEventListener("click", (e) => {
 function refreshWhitelist() {
     chrome.storage.sync.get(["whitelist"]).then((result) => {
         whitelist = result.whitelist;
+        /*if(typeof whitelist != Array) {
+            whitelist = [];
+            chrome.storage.sync.set({ whitelist: whitelist });
+        }*/
         
         let nameList = document.querySelector("#namelist")
         nameList.innerHTML = "";

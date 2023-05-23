@@ -13,17 +13,17 @@ svg[data-testid=icon-verified] {
 }
 `;//StyleElement content, adds basic filters
 
-
+console.log(location.pathname)
 if(location.pathname == "/home") {
     chrome.storage.sync.get(["hideHome"]).then((result) => {
         console.log(result)
-        if(result === true)
+        if(result.hideHome === true)
             hideContent();//applies blocking filters
         else
             applyFilters();//applies basic filters
 
-        if(typeof result != Boolean)
-            chrome.storage.sync.set({"hideHome":false});//sets `hideHome` to the default value upon first init
+        if(typeof result.hideHome != Boolean)
+            chrome.storage.sync.set({"hideHome":true});//sets `hideHome` to the default value upon first init
     });
 }
 else
@@ -45,16 +45,16 @@ function hideContent() {
     }
     `;//adds universal blocking filters
 
-    if(/\/status\//.test(location.pathname)) {
-        originalPost = location.pathname.split("/")[1];
-    }
-    
-    
     chrome.storage.sync.get(["whitelist"]).then((result) => {//gets the whitelist...
         whitelist = result.whitelist;
-        whitelist.push(originalPost);//adds OP to whitelist temporarily
+        if(/\/status\//.test(location.pathname)) {
+            console.log("/status")
+            originalPost = location.pathname.split("/")[1];
+            if(!whitelist.includes(originalPost))
+                whitelist.push(originalPost);//adds OP to whitelist temporarily
+        }
         console.log(whitelist)
-    
+
         for(let i=0, iLength=whitelist.length; i<iLength; i++) {//iterates through all whitelisted usernames
             console.log(i)
             
@@ -69,6 +69,7 @@ function hideContent() {
     });
 
 }
+
 
 function applyFilters() {
     console.log(styleStr)
