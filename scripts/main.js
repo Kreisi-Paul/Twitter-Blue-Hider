@@ -4,7 +4,7 @@ let originalPost = new String();
 const styleEl = document.createElement("style");//create StyleElement to inject
 document.head.appendChild(styleEl);//inject StyleElement
 let styleStr =`
-a[aria-label="Verified Organizations"], a[aria-label="Twitter Blue"] {
+a[aria-label="Verified"] {
     /*hides twitter blue ads*/
     display: none;
 }
