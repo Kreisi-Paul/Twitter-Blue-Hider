@@ -2,6 +2,7 @@ let domChangeTimeout = false;
 let whitelist = new Array();
 let originalPost = new String();
 const styleEl = document.createElement("style");//create StyleElement to inject
+document.head.appendChild(styleEl);//inject StyleElement
 let styleStr =`
 a[aria-label="Verified Organizations"], a[aria-label="Twitter Blue"] {
     /*hides twitter blue ads*/
@@ -13,6 +14,18 @@ svg[data-testid=icon-verified] {
 }
 `;//StyleElement content, adds basic filters
 
+
+mainInit()
+
+
+navigation.addEventListener("navigate", () => {
+    console.log("navigated!")
+    styleEl.innerHTML = "";
+    mainInit();
+});
+
+function mainInit() {
+
 console.log(location.pathname)
 if(location.pathname == "/home") {
     chrome.storage.sync.get(["hideHome"]).then((result) => {
@@ -20,7 +33,7 @@ if(location.pathname == "/home") {
         if(result.hideHome === true)
             hideContent();//applies blocking filters
         else
-            applyFilters();//applies basic filters
+            applyFilters(styleStr);//applies basic filters
 
         if(typeof result.hideHome != Boolean)
             chrome.storage.sync.set({"hideHome":true});//sets `hideHome` to the default value upon first init
@@ -29,10 +42,12 @@ if(location.pathname == "/home") {
 else
     hideContent();
 
+}
 
 function hideContent() {
 
-    styleStr += `
+    let appliedStyle = new String();
+    appliedStyle = styleStr + `
     div[data-testid=cellInnerDiv]:has(span > svg[data-testid=icon-verified] > g > path:not([fill])) {
         /*hides articles that contain a verified Icon*/
         /*background-color: darkred;*/
@@ -57,22 +72,21 @@ function hideContent() {
 
         for(let i=0, iLength=whitelist.length; i<iLength; i++) {//iterates through all whitelisted usernames
             console.log(i)
-            
-            styleStr += `
+
+            appliedStyle += `
             div[data-testid=cellInnerDiv]:has(a[href="/${whitelist[i]}"]) {
                 display: initial !important;
                 background-color: initial !important;
             }
             `;
         }
-        applyFilters();
+        applyFilters(appliedStyle);
     });
 
 }
 
 
-function applyFilters() {
-    console.log(styleStr)
-    styleEl.innerText = styleStr;
-    document.head.appendChild(styleEl);//inject StyleElement
+function applyFilters(appliedStyle) {
+    console.log(appliedStyle)
+    styleEl.innerText = appliedStyle;
 }
