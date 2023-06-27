@@ -9,7 +9,7 @@ a[aria-label="Verified"] {
     display: none;
 }
 aside[aria-label="Get Verified"] {
-    /*hides bigtwitter blue ad*/
+    /*hides big twitter blue ad*/
     display: none;
 }
 svg[data-testid=icon-verified] {
