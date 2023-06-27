@@ -8,6 +8,10 @@ a[aria-label="Verified"] {
     /*hides twitter blue ads*/
     display: none;
 }
+aside[aria-label="Get Verified"] {
+    /*hides bigtwitter blue ad*/
+    display: none;
+}
 svg[data-testid=icon-verified] {
     /*keep this for whitelisting*/
     color: rgb(244, 33, 46);
